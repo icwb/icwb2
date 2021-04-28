@@ -1,6 +1,7 @@
 import { ExpressAppRoute } from './index';
 import ICWB from '../lib/icwb';
 import ICWBDB from '../lib/icwb/db';
+import { ICWBExternalServices } from '../lib/icwb/external';
 
 export const routes: ExpressAppRoute[] = [
   {
@@ -35,6 +36,17 @@ export const routes: ExpressAppRoute[] = [
     handler: async (req, res) => {
       wrapXApiSecretValidation({ req, res }, async () => {
         await ICWB.startInvasion();
+
+        const imgData = ICWB.canvas.getCanvasData();
+        const imageUrl = await ICWBDB.uploadImageToFirebase(imgData);
+        await ICWBExternalServices.uploadToFacebook(
+          {
+            imageUrl,
+            message: ICWB.event.message,
+            rankMessage: ICWB.getRankMessage()
+          }
+        );
+        await ICWB.uploadDatas();
 
         const data = {
           message: 'Invasion Triggered',

@@ -304,7 +304,7 @@ class ICWBMain {
     return message;
   }
 
-  private getRankMessage() {
+  public getRankMessage() {
     const ranks: any[] = [];
     const invaders = this.getStandingProvinces()
       .filter(province => {
