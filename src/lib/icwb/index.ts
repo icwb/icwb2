@@ -46,7 +46,7 @@ class ICWBMain {
   public async beginTask() {
     console.log('Begin!');
 
-    ScheduleEveryNMinutes(1, async () => {
+    ScheduleEveryHour(async () => {
       if(this.standingProvincesCount === 1) { return; }
 
       if(this.provincesData.length > 34) {
