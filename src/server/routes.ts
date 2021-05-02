@@ -122,7 +122,7 @@ export const routes: ExpressAppRoute[] = [
     }
   },
   {
-    path: '/icwb/events',
+    path: '/icwb/event',
     mode: 'GET',
     handler: (req, res) => {
       wrapXApiSecretValidation({ req, res }, async () => {
@@ -131,7 +131,7 @@ export const routes: ExpressAppRoute[] = [
           .header({ 'Content-Type': 'application/json' })
           .json({
             data: {
-              eventHistory: ICWB.history
+              event: ICWB.event
             }
           });
       });
