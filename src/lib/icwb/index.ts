@@ -36,7 +36,7 @@ class ICWBMain {
       this.provincesId.push(province.id!);
     }
 
-    this.event = ("data" in event) ? _.cloneDeep(event.data) : this.event;
+    this.event = (typeof(event) == object) ? _.cloneDeep(event) : this.event;
     this.standingProvincesCount = this.provincesData.length;
     this.canvas.updateProvinceData(this.provincesData);
     this.canvas.render(); // Apparently sometime it's not rendering
